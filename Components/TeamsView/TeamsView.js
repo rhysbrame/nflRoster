@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, Button, ActivityIndicator } from "react-native";
+import { View, Button, ActivityIndicator } from "react-native";
 
-import Teams from "./Teams";
+import TeamsFetch from "./TeamsFetch";
 
 export default class TeamsView extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ export default class TeamsView extends Component {
           paddingBottom: 35
         }}
       >
-        <Teams
+        <TeamsFetch
           teamsData={this.state.dataSource}
           navigation={this.props.navigation}
         />

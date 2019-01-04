@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  FlatList,
-  TouchableHighlight,
-  StyleSheet,
-  Dimensions
-} from "react-native";
+import { View, FlatList, TouchableHighlight, StyleSheet } from "react-native";
+
+import TeamTile from "./TeamTile";
 
 function unpackTeams(data) {
   const teamsArray = [];
@@ -20,13 +15,11 @@ function unpackTeams(data) {
   return teamsArray;
 }
 
-export default class Teams extends Component {
+export default class TeamsFetch extends Component {
   constructor(props) {
     super(props);
     this.state = { teams: unpackTeams(this.props.teamsData) };
   }
-
-  onPress = () => this.props.navigation.navigate("Roster");
 
   render() {
     return (
@@ -34,10 +27,12 @@ export default class Teams extends Component {
         <FlatList
           data={this.state.teams}
           renderItem={({ item }) => (
-            <TouchableHighlight style={styles.button} onPress={this.onPress}>
-              <Text style={styles.buttonText}>
-                {item.market + " " + item.name + " " + item.id}
-              </Text>
+            <TouchableHighlight
+              onPress={() => {
+                this.props.navigation.navigate("Roster", { itemID: item.id });
+              }}
+            >
+              <TeamTile team={item} />
             </TouchableHighlight>
           )}
           keyExtractor={({ id }, index) => id}
@@ -49,26 +44,11 @@ export default class Teams extends Component {
 }
 
 const numColumns = 4;
-const size = Dimensions.get("window").width / numColumns - 10;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5
-  },
-  button: {
-    flex: 1,
-    width: size,
-    height: size,
-    backgroundColor: "lightblue"
-  },
-  buttonText: {
-    flex: 1,
-    fontSize: 14,
-    color: "black",
-    fontStyle: "italic",
-    fontWeight: "bold",
-    textAlign: "left",
-    textAlignVertical: "center"
+    padding: 5,
+    backgroundColor: "blue"
   }
 });
