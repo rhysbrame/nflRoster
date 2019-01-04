@@ -9,15 +9,19 @@
 import React, { Component } from "react";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import HomeView from "./Components/HomeView";
-import TeamsView from "./Components/TeamsView";
+import HomeView from "./Components/HomeView/HomeView";
+import TeamsView from "./Components/TeamsView/TeamsView";
+import RosterView from "./Components/RosterView/RosterView";
+import PlayerView from "./Components/PlayerView/PlayerView";
 
 type Props = {};
 
 const AppNavigator = createStackNavigator(
   {
     Home: HomeView,
-    Teams: TeamsView
+    Teams: TeamsView,
+    Roster: RosterView,
+    Player: PlayerView
   },
   {
     initialRouteName: "Home"
