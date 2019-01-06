@@ -15,13 +15,14 @@ function unpackTeams(data) {
   return teamsArray;
 }
 
-export default class TeamsFetch extends Component {
+export default class Teams extends Component {
   constructor(props) {
     super(props);
     this.state = { teams: unpackTeams(this.props.teamsData) };
   }
 
   render() {
+    console.log("teams state", this.state);
     return (
       <View style={styles.container}>
         <FlatList

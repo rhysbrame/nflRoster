@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Button, ActivityIndicator } from "react-native";
 
-import TeamsFetch from "./TeamsFetch";
+import Teams from "./Teams";
 
 export default class TeamsView extends Component {
   constructor(props) {
@@ -15,13 +15,10 @@ export default class TeamsView extends Component {
     )
       .then(response => response.json())
       .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            dataSource: responseJson
-          },
-          function() {}
-        );
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson
+        });
       })
       .catch(error => {
         console.error(error);
@@ -44,7 +41,7 @@ export default class TeamsView extends Component {
           paddingBottom: 35
         }}
       >
-        <TeamsFetch
+        <Teams
           teamsData={this.state.dataSource}
           navigation={this.props.navigation}
         />
