@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, ActivityIndicator } from "react-native";
+
+import Coaches from "./Coaches";
+import Players from "./Players";
 
 export default class RosterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      teamData: {},
       teamID: props.navigation.getParam("itemID", "NO-ID")
     };
   }
@@ -18,15 +20,10 @@ export default class RosterView extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            teamData: responseJson
-          },
-          function() {
-            console.log("teamdata", this.state.teamData);
-          }
-        );
+        this.setState({
+          teamData: responseJson,
+          isLoading: false
+        });
       })
       .catch(error => {
         console.error(error);
@@ -34,14 +31,31 @@ export default class RosterView extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, padding: 50 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
       <View>
-        <Text>RosterView: {this.state.teamID}</Text>
-        <Text>Roster: {this.state.teamData.alias}</Text>
-        <Button
-          title="Go to player view"
-          onPress={() => this.props.navigation.navigate("Player")}
-        />
+        <Text>{this.state.teamData.market}</Text>
+        <Text>{this.state.teamData.name}</Text>
+        <Text>Roster View</Text>
+        <Coaches
+          coaches={this.state.teamData.coaches}
+          navigation={this.props.navigation}
+        >
+          Coaches:
+        </Coaches>
+        <Players
+          players={this.state.teamData.players}
+          navigation={this.props.navigation}
+        >
+          Player Roster:
+        </Players>
       </View>
     );
   }
