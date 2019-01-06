@@ -29,7 +29,10 @@ export default class Teams extends Component {
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => {
-                this.props.navigation.navigate("Roster", { itemID: item.id });
+                this.props.navigation.navigate("Roster", {
+                  itemID: item.id,
+                  teamName: item.name
+                });
               }}
             >
               <TeamTile team={item} />

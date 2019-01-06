@@ -26,7 +26,16 @@ const AppNavigator = createStackNavigator(
     Coach: CoachView
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Home",
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "midnightblue"
+      },
+      headerTintColor: "gold",
+      headerTitleStyle: {
+        fontWeight: "bold"
+      }
+    }
   }
 );
 

@@ -13,6 +13,13 @@ export default class RosterView extends Component {
     };
   }
 
+  static navigationOptions = ({ navigation }) => {
+    console.log("****", navigation);
+    return {
+      title: navigation.getParam("teamName")
+    };
+  };
+
   componentDidMount() {
     const teamID = this.state.teamID;
     const url = `https://api.sportradar.us/nfl/official/trial/v5/en/teams/${teamID}/profile.json?api_key=uafzw3ah4tr78cg29dd86rbs`;

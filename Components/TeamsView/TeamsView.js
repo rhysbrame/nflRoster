@@ -9,6 +9,10 @@ export default class TeamsView extends Component {
     this.state = { isLoading: true };
   }
 
+  static navigationOptions = {
+    title: "Teams"
+  };
+
   componentDidMount() {
     return fetch(
       "https://api.sportradar.us/nfl/official/trial/v5/en/league/hierarchy.json?api_key=uafzw3ah4tr78cg29dd86rbs"
