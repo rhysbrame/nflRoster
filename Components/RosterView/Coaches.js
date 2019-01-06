@@ -17,7 +17,6 @@ export default class Coaches extends Component {
   }
 
   render() {
-    console.log("coaches state:", this.state);
     return (
       <View>
         <Text>Coaches</Text>

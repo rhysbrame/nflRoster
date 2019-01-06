@@ -17,7 +17,6 @@ export default class Players extends Component {
   }
 
   render() {
-    console.log("players state:", this.state);
     return (
       <View>
         <Text>Players</Text>

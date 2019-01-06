@@ -22,7 +22,6 @@ export default class Teams extends Component {
   }
 
   render() {
-    console.log("teams state", this.state);
     return (
       <View style={styles.container}>
         <FlatList
