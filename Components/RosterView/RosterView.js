@@ -14,7 +14,6 @@ export default class RosterView extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    console.log("****", navigation);
     return {
       title: navigation.getParam("teamName")
     };
