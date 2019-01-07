@@ -3,12 +3,14 @@ import { Text, View, StyleSheet, Button } from "react-native";
 
 class HomeView extends Component {
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Text style={styles.text}>NFL Roster</Text>
         <Button
           title="Enter"
-          onPress={() => this.props.navigation.navigate("Teams")}
+          onPress={() => navigation.navigate("Teams")}
           style={styles.button}
         />
       </View>

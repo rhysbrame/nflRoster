@@ -8,9 +8,11 @@ export default class CoachTile extends Component {
   }
 
   render() {
+    const { coach } = this.state;
+
     return (
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{this.state.coach.full_name}</Text>
+        <Text style={styles.buttonText}>{coach.full_name}</Text>
       </View>
     );
   }

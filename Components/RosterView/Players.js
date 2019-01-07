@@ -17,15 +17,18 @@ export default class Players extends Component {
   }
 
   render() {
+    const { players } = this.state;
+    const { navigation } = this.props;
+
     return (
       <View>
         <Text>Players</Text>
         <FlatList
-          data={this.state.players}
+          data={players}
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => {
-                this.props.navigation.navigate("Player", { itemID: item.id });
+                navigation.navigate("Player", { itemID: item.id });
               }}
             >
               <PlayerTile player={item} />

@@ -22,14 +22,16 @@ export default class Teams extends Component {
   }
 
   render() {
+    const { teams } = this.state;
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.teams}
+          data={teams}
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => {
-                this.props.navigation.navigate("Roster", {
+                navigation.navigate("Roster", {
                   itemID: item.id,
                   teamName: item.name
                 });

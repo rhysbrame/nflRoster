@@ -28,7 +28,10 @@ export default class PlayerView extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    const { isLoading, playerData } = this.state;
+    const { navigation } = this.props;
+
+    if (isLoading) {
       return (
         <View style={{ flex: 1, padding: 50 }}>
           <ActivityIndicator />
@@ -38,11 +41,11 @@ export default class PlayerView extends Component {
 
     return (
       <View>
-        <Text>PlayerView: {this.state.playerData.name}</Text>
-        <Text>PlayerView: {this.state.playerData.status}</Text>
+        <Text>PlayerView: {playerData.name}</Text>
+        <Text>PlayerView: {playerData.status}</Text>
         <Button
           title="Go home..."
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Home")}
         />
       </View>
     );

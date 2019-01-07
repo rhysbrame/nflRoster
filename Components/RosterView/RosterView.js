@@ -38,7 +38,9 @@ export default class RosterView extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    const { isLoading, teamData } = this.state;
+    const { navigation } = this.props;
+    if (isLoading) {
       return (
         <View style={{ flex: 1, padding: 50 }}>
           <ActivityIndicator />
@@ -48,19 +50,13 @@ export default class RosterView extends Component {
 
     return (
       <View>
-        <Text>{this.state.teamData.market}</Text>
-        <Text>{this.state.teamData.name}</Text>
+        <Text>{teamData.market}</Text>
+        <Text>{teamData.name}</Text>
         <Text>Roster View</Text>
-        <Coaches
-          coaches={this.state.teamData.coaches}
-          navigation={this.props.navigation}
-        >
+        <Coaches coaches={teamData.coaches} navigation={navigation}>
           Coaches:
         </Coaches>
-        <Players
-          players={this.state.teamData.players}
-          navigation={this.props.navigation}
-        >
+        <Players players={teamData.players} navigation={navigation}>
           Player Roster:
         </Players>
       </View>

@@ -10,12 +10,15 @@ export default class CoachView extends Component {
   }
 
   render() {
+    const { coach } = this.state;
+    const { navigation } = this.props;
+
     return (
       <View>
-        <Text>Coach View: {this.state.coach.full_name}</Text>
+        <Text>Coach View: {coach.full_name}</Text>
         <Button
           title="Go home..."
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Home")}
         />
       </View>
     );

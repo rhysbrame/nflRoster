@@ -10,7 +10,14 @@ export default class TeamsView extends Component {
   }
 
   static navigationOptions = {
-    title: "Teams"
+    title: "Teams",
+    headerRight: (
+      <Button
+        onPress={() => alert("This is a button!")}
+        title="Info"
+        color="#fff"
+      />
+    )
   };
 
   componentDidMount() {
@@ -30,7 +37,10 @@ export default class TeamsView extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    const { isLoading, dataSource } = this.state;
+    const { navigation } = this.props;
+
+    if (isLoading) {
       return (
         <View style={{ flex: 1, padding: 50 }}>
           <ActivityIndicator />
@@ -45,13 +55,10 @@ export default class TeamsView extends Component {
           paddingBottom: 35
         }}
       >
-        <Teams
-          teamsData={this.state.dataSource}
-          navigation={this.props.navigation}
-        />
+        <Teams teamsData={dataSource} navigation={navigation} />
         <Button
           title="Go to Home"
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Home")}
         />
       </View>
     );

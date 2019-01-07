@@ -8,11 +8,13 @@ export default class TeamTile extends Component {
   }
 
   render() {
+    const { team } = this.state;
+
     return (
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{this.state.team.market}</Text>
-        <Text style={styles.buttonText}>{this.state.team.name}</Text>
-        <Text style={styles.buttonText}>{this.state.team.alias}</Text>
+        <Text style={styles.buttonText}>{team.market}</Text>
+        <Text style={styles.buttonText}>{team.name}</Text>
+        <Text style={styles.buttonText}>{team.alias}</Text>
       </View>
     );
   }

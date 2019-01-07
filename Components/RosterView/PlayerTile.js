@@ -8,9 +8,11 @@ export default class PlayerTile extends Component {
   }
 
   render() {
+    const { player } = this.state;
+
     return (
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{this.state.player.name}</Text>
+        <Text style={styles.buttonText}>{player.name}</Text>
       </View>
     );
   }
