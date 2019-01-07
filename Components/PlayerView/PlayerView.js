@@ -5,6 +5,7 @@ export default class PlayerView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
       isLoading: true,
       playerID: props.navigation.getParam("itemID", "NO-ID")
     };
@@ -16,38 +17,49 @@ export default class PlayerView extends Component {
 
     return fetch(url)
       .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          playerData: responseJson,
-          isLoading: false
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(
+        responseJson => {
+          this.setState({
+            isLoading: false,
+            playerData: responseJson
+          });
+        },
+        error => {
+          this.setState({
+            isLoading: false,
+            error
+          });
+        }
+      );
   }
 
   render() {
-    const { isLoading, playerData } = this.state;
+    const { isLoading, playerData, error } = this.state;
     const { navigation } = this.props;
 
-    if (isLoading) {
+    if (error) {
+      return (
+        <View>
+          <Text>Error: {error.message}</Text>
+        </View>
+      );
+    } else if (isLoading) {
       return (
         <View style={{ flex: 1, padding: 50 }}>
           <ActivityIndicator />
         </View>
       );
+    } else {
+      return (
+        <View>
+          <Text>PlayerView: {playerData.name}</Text>
+          <Text>PlayerView: {playerData.status}</Text>
+          <Button
+            title="Go home..."
+            onPress={() => navigation.navigate("Home")}
+          />
+        </View>
+      );
     }
-
-    return (
-      <View>
-        <Text>PlayerView: {playerData.name}</Text>
-        <Text>PlayerView: {playerData.status}</Text>
-        <Button
-          title="Go home..."
-          onPress={() => navigation.navigate("Home")}
-        />
-      </View>
-    );
   }
 }

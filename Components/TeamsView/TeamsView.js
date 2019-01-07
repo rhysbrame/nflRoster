@@ -6,7 +6,7 @@ import Teams from "./Teams";
 export default class TeamsView extends Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true };
+    this.state = { error: null, isLoading: true };
   }
 
   static navigationOptions = {
@@ -25,42 +25,54 @@ export default class TeamsView extends Component {
       "https://api.sportradar.us/nfl/official/trial/v5/en/league/hierarchy.json?api_key=uafzw3ah4tr78cg29dd86rbs"
     )
       .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(
+        responseJson => {
+          this.setState({
+            isLoading: false,
+            dataSource: responseJson
+          });
+        },
+        error => {
+          this.setState({
+            isLoading: false,
+            error
+          });
+        }
+      );
   }
 
   render() {
-    const { isLoading, dataSource } = this.state;
+    const { isLoading, dataSource, error } = this.state;
     const { navigation } = this.props;
 
-    if (isLoading) {
+    if (error) {
+      return (
+        <View>
+          <Text>Error: {error.message}</Text>
+        </View>
+      );
+    } else if (isLoading) {
       return (
         <View style={{ flex: 1, padding: 50 }}>
           <ActivityIndicator />
         </View>
       );
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            paddingTop: 5,
+            paddingBottom: 35
+          }}
+        >
+          <Teams teamsData={dataSource} navigation={navigation} />
+          <Button
+            title="Go to Home"
+            onPress={() => navigation.navigate("Home")}
+          />
+        </View>
+      );
     }
-    return (
-      <View
-        style={{
-          flex: 1,
-          paddingTop: 5,
-          paddingBottom: 35
-        }}
-      >
-        <Teams teamsData={dataSource} navigation={navigation} />
-        <Button
-          title="Go to Home"
-          onPress={() => navigation.navigate("Home")}
-        />
-      </View>
-    );
   }
 }

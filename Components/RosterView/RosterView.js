@@ -8,6 +8,7 @@ export default class RosterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
       isLoading: true,
       teamID: props.navigation.getParam("itemID", "NO-ID")
     };
@@ -25,40 +26,52 @@ export default class RosterView extends Component {
 
     return fetch(url)
       .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          teamData: responseJson,
-          isLoading: false
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(
+        responseJson => {
+          this.setState({
+            isLoading: false,
+            teamData: responseJson
+          });
+        },
+        error => {
+          this.setState({
+            isLoading: false,
+            error
+          });
+        }
+      );
   }
 
   render() {
-    const { isLoading, teamData } = this.state;
+    const { isLoading, teamData, error } = this.state;
     const { navigation } = this.props;
-    if (isLoading) {
+
+    if (error) {
+      return (
+        <View>
+          <Text>Error: {error.message}</Text>
+        </View>
+      );
+    } else if (isLoading) {
       return (
         <View style={{ flex: 1, padding: 50 }}>
           <ActivityIndicator />
         </View>
       );
+    } else {
+      return (
+        <View>
+          <Text>{teamData.market}</Text>
+          <Text>{teamData.name}</Text>
+          <Text>Roster View</Text>
+          <Coaches coaches={teamData.coaches} navigation={navigation}>
+            Coaches:
+          </Coaches>
+          <Players players={teamData.players} navigation={navigation}>
+            Player Roster:
+          </Players>
+        </View>
+      );
     }
-
-    return (
-      <View>
-        <Text>{teamData.market}</Text>
-        <Text>{teamData.name}</Text>
-        <Text>Roster View</Text>
-        <Coaches coaches={teamData.coaches} navigation={navigation}>
-          Coaches:
-        </Coaches>
-        <Players players={teamData.players} navigation={navigation}>
-          Player Roster:
-        </Players>
-      </View>
-    );
   }
 }
