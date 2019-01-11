@@ -12,8 +12,9 @@ export default class TeamTile extends Component {
 
     return (
       <View style={styles.button}>
-        <Image source={require("./img/NFL.png")} style={styles.image} />
+        <Image source={require("./img/Bills.png")} style={styles.image} />
         <Text style={styles.buttonText}>{team.market}</Text>
+        <Text style={styles.buttonText}>{team.name}</Text>
       </View>
     );
   }

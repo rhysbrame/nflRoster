@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Image } from "react-native";
 
 class HomeView extends Component {
   render() {
@@ -7,6 +7,10 @@ class HomeView extends Component {
 
     return (
       <View style={styles.container}>
+        <Image
+          source={require("../TeamsView/img/NFL.png")}
+          style={{ height: 100, width: 75 }}
+        />
         <Text style={styles.text}>NFL Roster</Text>
         <Button
           title="Enter"
