@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Text, View, StyleSheet, Dimensions, Image } from "react-native";
 
 export default class TeamTile extends Component {
   constructor(props) {
@@ -12,9 +12,8 @@ export default class TeamTile extends Component {
 
     return (
       <View style={styles.button}>
+        <Image source={require("./img/NFL.png")} style={styles.image} />
         <Text style={styles.buttonText}>{team.market}</Text>
-        <Text style={styles.buttonText}>{team.name}</Text>
-        <Text style={styles.buttonText}>{team.alias}</Text>
       </View>
     );
   }
@@ -40,5 +39,10 @@ const styles = StyleSheet.create({
     textAlign: "left",
     textAlignVertical: "center",
     backgroundColor: "deepskyblue"
+  },
+  image: {
+    flex: 1,
+    width: size,
+    height: size
   }
 });

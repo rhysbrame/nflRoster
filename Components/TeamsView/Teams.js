@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, FlatList, TouchableHighlight, StyleSheet } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableHighlight,
+  StyleSheet,
+  Dimensions
+} from "react-native";
 
 import TeamTile from "./TeamTile";
 
@@ -37,7 +43,9 @@ export default class Teams extends Component {
                 });
               }}
             >
-              <TeamTile team={item} />
+              <View>
+                <TeamTile team={item} />
+              </View>
             </TouchableHighlight>
           )}
           keyExtractor={({ id }, index) => id}
@@ -49,6 +57,7 @@ export default class Teams extends Component {
 }
 
 const numColumns = 4;
+const size = Dimensions.get("window").width / numColumns;
 
 const styles = StyleSheet.create({
   container: {
