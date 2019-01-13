@@ -8,7 +8,7 @@ class HomeView extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require("../TeamsView/img/NFL.png")}
+          source={require("../../Images/NFL.png")}
           style={{ height: 100, width: 75 }}
         />
         <Text style={styles.text}>NFL Roster</Text>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions, Image } from "react-native";
+import { images } from "../../Images/Images";
 
 export default class TeamTile extends Component {
   constructor(props) {
@@ -9,10 +10,11 @@ export default class TeamTile extends Component {
 
   render() {
     const { team } = this.state;
-
+    //this logic isnt working
+    // console.log("***", imageSource);
     return (
       <View style={styles.button}>
-        <Image source={require("./img/Bills.png")} style={styles.image} />
+        {/* <Image source={imageSource} style={styles.image} /> */}
         <Text style={styles.buttonText}>{team.market}</Text>
         <Text style={styles.buttonText}>{team.name}</Text>
       </View>
